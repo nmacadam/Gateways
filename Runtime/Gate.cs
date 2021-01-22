@@ -15,16 +15,25 @@ namespace Gateways
 		/// <summary>
 		/// This method utilizes this gate for a scene load
 		/// </summary>
-		public virtual void UseGate()
+		public void UseGate()
 		{
 			GatewayMapper.WriteTargetGate(_attachedGate);
-			SceneManager.LoadScene(_attachedGate.GetSceneInfo().BuildIndex);
+			LoadScene(GetAttachedSceneInfo());
 		}
 
 		/// <summary>
 		/// This method is invoked when this gate is the gate to start at for a scene
 		/// </summary>
 		public abstract void OnGateResolved();
+
+		/// <summary>
+		/// The concrete scene loading implementation
+		/// </summary>
+		/// <param name="info">Info about the target scene (name, path, build index)</param>
+		protected virtual void LoadScene(SceneInfo info)
+		{
+			SceneManager.LoadScene(info.BuildIndex);
+		}
 
 		/// <summary>
 		/// Gets the Scene information for the scene that the attached gate is in

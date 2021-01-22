@@ -1245,7 +1245,7 @@ MonoBehaviour:
     _sceneReference:
       _sceneAsset: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
       _sceneName: Scene B
-      _scenePath: Assets/Scenes/Scene B.unity
+      _scenePath: Assets/Gateways/Samples/Scenes/Scene B.unity
       _buildIndex: 3
     _serializedGuid: b68582de66323b4fa0de0e52320b2f85
     _cachedName: Gate #3

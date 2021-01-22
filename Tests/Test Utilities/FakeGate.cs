@@ -5,11 +5,6 @@ namespace Gateways.TestUtilities
     /// </summary>
 	public class FakeGate : Gate
     {
-        public override void UseGate()
-        {
-
-        }
-
         public override void OnGateResolved()
         {
 
