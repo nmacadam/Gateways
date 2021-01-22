@@ -26,7 +26,7 @@ Add the `MyGate` component to the doorways in your scenes, then open both scenes
 
 ## Installation
 ### Git
-This package can be installed with the Unity Package Manager by selecting the add package dropdown, clicking "Add package from git url...", and entering `https://github.com/nmacadam/Oni.git`.
+This package can be installed with the Unity Package Manager by selecting the add package dropdown, clicking "Add package from git url...", and entering `https://github.com/nmacadam/Gateways.git`.
 
 Alternatively the package can be added directly to the Unity project's manifest.json by adding the following line:
 ```
