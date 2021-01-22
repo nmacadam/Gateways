@@ -10,7 +10,7 @@ namespace Gateways
 	[DisallowMultipleComponent]
     public abstract class Gate : GuidComponent
 	{
-		[SerializeField] private GatewayReference _attachedGate = new GatewayReference();
+		[SerializeField] private GateReference _attachedGate = new GateReference();
 
 		/// <summary>
 		/// This method utilizes this gate for a scene load

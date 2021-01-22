@@ -39,7 +39,7 @@ namespace Gateways
     }
 
     [System.Serializable]
-    public class GatewayReference : ISerializationCallbackReceiver
+    public class GateReference : ISerializationCallbackReceiver
     {
 		// cache the referenced Game Object if we find one for performance
 		private GameObject _cachedGameObject;
@@ -125,9 +125,9 @@ namespace Gateways
 			return new SceneInfo(_sceneReference.SceneName, _sceneReference.ScenePath, _sceneReference.BuildIndex);
 		}
 
-		public GatewayReference() { }
+		public GateReference() { }
 
-		public GatewayReference(GuidComponent target)
+		public GateReference(GuidComponent target)
 		{
 			_guid = target.GetGuid();
 		}

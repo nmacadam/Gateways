@@ -45,7 +45,7 @@ namespace Gateways.Tests
         [UnityTest]
         public IEnumerator NewGateReference_IsValid()
         {
-            GatewayReference reference = new GatewayReference(_fake.Instance);
+            GateReference reference = new GateReference(_fake.Instance);
             Assert.AreEqual(reference.gameObject, _fake.Instance.gameObject);
 
             yield return null;
@@ -57,7 +57,7 @@ namespace Gateways.Tests
             var gameObject = new GameObject();
 			var instance = gameObject.AddComponent<FakeGate>();
             
-            GatewayReference reference = new GatewayReference(instance);
+            GateReference reference = new GateReference(instance);
             Object.DestroyImmediate(gameObject);
 
             Assert.IsNull(reference.gameObject);

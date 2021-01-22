@@ -18,7 +18,7 @@ namespace Gateways.Internal
             SceneManager.activeSceneChanged += TryResolveTargetGate;
         }
 
-        public static void WriteTargetGate(GatewayReference gatewayReference)
+        public static void WriteTargetGate(GateReference gatewayReference)
         {
             WriteTargetGate(gatewayReference.Guid);
         }

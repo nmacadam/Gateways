@@ -9,8 +9,8 @@ using Gateways.Internal;
 
 namespace Gateways.Editor
 {
-	[CustomPropertyDrawer(typeof(GatewayReference))]
-	public class GatewayReferenceDrawer: PropertyDrawer 
+	[CustomPropertyDrawer(typeof(GateReference))]
+	public class GateReferenceDrawer: PropertyDrawer 
 	{
 		private SerializedProperty _guidProp;
 		private SerializedProperty _sceneProp;
