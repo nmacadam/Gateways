@@ -10,15 +10,14 @@ using Gateways;
 
 public class MyGate : Gate
 {
-  public override void UseGate()
-  {
-    // Load the next scene
-  }
-
   public override void OnGateResolved()
   {
-    // Move your character to this gate's position
+    // Called when this gate is the one resolved after the scene changes
+    // Use this method to move your character to this gate's position
   }
+  
+  // You can also override the LoadScene method to implement
+  // your own scene-loading solution
 }
 ```
 Add the `MyGate` component to the doorways in your scenes, then open both scenes at once.  Drag and drop the `Gate` components to their respective output `Gate`s.  Don't worry–The references being displayed are actually serialized unique identifiers!  They will persist after you close the scenes, and are how Gateways will resolve connections between scenes.
