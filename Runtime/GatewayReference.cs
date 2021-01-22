@@ -120,7 +120,10 @@ namespace Gateways
 			}
 		}
 
-		public SceneInfo SceneInfo => new SceneInfo(_sceneReference.SceneName, _sceneReference.ScenePath, _sceneReference.BuildIndex);
+		public SceneInfo GetSceneInfo()
+		{
+			return new SceneInfo(_sceneReference.SceneName, _sceneReference.ScenePath, _sceneReference.BuildIndex);
+		}
 
 		public GatewayReference() { }
 

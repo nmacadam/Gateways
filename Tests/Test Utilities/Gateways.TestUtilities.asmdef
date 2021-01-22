@@ -1,0 +1,15 @@
+{
+    "name": "Gateways.TestUtilities",
+    "references": [
+        "GUID:1895a91365803e2418543e1f63430209"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
