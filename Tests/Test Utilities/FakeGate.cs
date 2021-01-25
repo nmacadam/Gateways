@@ -10,9 +10,9 @@ namespace Gateways.TestUtilities
 
         }
 
-        public SceneInfo GetAttachedSceneInfoTest()
+        public SceneReference GetAttachedSceneInfoTest()
 		{
-			return GetAttachedSceneInfo();
+			return GetAttachedSceneReference();
 		}
     }
 }

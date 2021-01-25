@@ -9,6 +9,12 @@ namespace Gateways.Demo
 	public class ExampleGateway : Gate
 	{
 		[SerializeField] private MoveTarget _moveTarget = default;
+        
+        private void Awake()
+        {
+            Gate.OnGateUnresolved = () => Debug.Log("No matching gate");
+        }
+
 
         public override void OnGateResolved()
         {

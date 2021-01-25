@@ -247,10 +247,11 @@ MonoBehaviour:
   serializedGuid: b68582de66323b4fa0de0e52320b2f85
   _attachedGate:
     _sceneReference:
-      _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
-      _sceneName: Scene A
-      _scenePath: Assets/Scenes/Scene A.unity
-      _buildIndex: 0
+      _instance:
+        _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+        _sceneName: Scene A
+        _scenePath: Assets/Gateways/Samples/Scenes/Scene A.unity
+        _buildIndex: 0
     _serializedGuid: b995c1138a145646831e1b2106ced628
     _cachedName: Gate #1
     _cachedScene: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
@@ -365,10 +366,11 @@ MonoBehaviour:
   serializedGuid: 37ea72d7227acc44ad2978f7d7a49142
   _attachedGate:
     _sceneReference:
-      _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
-      _sceneName: Scene A
-      _scenePath: Assets/Scenes/Scene A.unity
-      _buildIndex: 0
+      _instance:
+        _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+        _sceneName: Scene A
+        _scenePath: Assets/Gateways/Samples/Scenes/Scene A.unity
+        _buildIndex: 0
     _serializedGuid: dc1852b260da9240970a3673cd4b6812
     _cachedName: Gate #2
     _cachedScene: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}

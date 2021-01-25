@@ -10,22 +10,18 @@
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-// Modified for Gateways, Copyright (c) Nathan MacAdam, All rights reserved. 
-// MIT License (See LICENSE file)
-
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Gateways.Internal;
 
-namespace Gateways.Editor
+namespace Gateways
 {
     /// <summary>
     /// Customer property drawer for `SceneReference`.
     /// </summary>
-    [CustomPropertyDrawer(typeof(LockedSceneReference))]
-    public class LockedSceneReferenceDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SceneReference))]
+    public class SceneReferenceDrawer : PropertyDrawer
     {
         private bool HasValidBuildIndex(SerializedProperty property)
         {
@@ -45,70 +41,63 @@ namespace Gateways.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var instance = property.FindPropertyRelative("_instance");
-            if (HasValidBuildIndex(instance)) return base.GetPropertyHeight(instance, label);
-            return base.GetPropertyHeight(instance, label) * 2 + 5;
+            if (HasValidBuildIndex(property)) return base.GetPropertyHeight(property, label);
+            return base.GetPropertyHeight(property, label) * 2 + 5;
         }
 
         private void OnPropertyGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             Rect lower;
             Rect buttonRect = new Rect();
-            var instance = property.FindPropertyRelative("_instance");
-            var scene = instance.FindPropertyRelative("_sceneAsset")?.objectReferenceValue;
+            var scene = property.FindPropertyRelative("_sceneAsset")?.objectReferenceValue;
 
             if (scene == null)
             {
                 // Update values cause the build index could've changed
-                instance.FindPropertyRelative("_sceneName").stringValue = "";
-                instance.FindPropertyRelative("_scenePath").stringValue = "";
-                instance.FindPropertyRelative("_buildIndex").intValue = -1;
+                property.FindPropertyRelative("_sceneName").stringValue = "";
+                property.FindPropertyRelative("_scenePath").stringValue = "";
+                property.FindPropertyRelative("_buildIndex").intValue = -1;
             }
 
             position = IMGUIUtils.SnipRectV(position, EditorGUIUtility.singleLineHeight, out lower, 2f);
-            if (HasValidBuildIndex(instance))
+            if (HasValidBuildIndex(property))
             {
                 if (scene != null)
                 {
                     // Update values cause the build index could've changed
-                    instance.FindPropertyRelative("_sceneName").stringValue = scene.name;
-                    instance.FindPropertyRelative("_scenePath").stringValue = AssetDatabase.GetAssetPath(scene);
-                    instance.FindPropertyRelative("_buildIndex").intValue = SceneUtility.GetBuildIndexByScenePath(
-                        instance.FindPropertyRelative("_scenePath").stringValue
+                    property.FindPropertyRelative("_sceneName").stringValue = scene.name;
+                    property.FindPropertyRelative("_scenePath").stringValue = AssetDatabase.GetAssetPath(scene);
+                    property.FindPropertyRelative("_buildIndex").intValue = SceneUtility.GetBuildIndexByScenePath(
+                        property.FindPropertyRelative("_scenePath").stringValue
                     );
                 }
             }
             else
             {
                 position = IMGUIUtils.SnipRectH(position, position.width - 70, out buttonRect, 6f);
-                instance.FindPropertyRelative("_buildIndex").intValue = -1;
+                property.FindPropertyRelative("_buildIndex").intValue = -1;
             }
 
             SceneAsset sceneAsset = scene as SceneAsset;
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-            // EditorGUI.BeginChangeCheck();
+            EditorGUI.BeginChangeCheck();
+            scene = EditorGUI.ObjectField(position, scene, typeof(SceneAsset), false);
+            if (EditorGUI.EndChangeCheck())
+            {
+                property.FindPropertyRelative("_sceneAsset").objectReferenceValue = scene;
+                sceneAsset = scene as SceneAsset;
+                if (sceneAsset != null)
+                {
+                    property.FindPropertyRelative("_sceneName").stringValue = scene.name;
+                    property.FindPropertyRelative("_scenePath").stringValue = AssetDatabase.GetAssetPath(scene);
+                    property.FindPropertyRelative("_buildIndex").intValue = SceneUtility.GetBuildIndexByScenePath(
+                        property.FindPropertyRelative("_scenePath").stringValue
+                    );
+                }
+            }
 
-            bool guiState = GUI.enabled;
-            GUI.enabled = false;
-            EditorGUI.ObjectField(position, scene, typeof(SceneAsset), false);
-            GUI.enabled = guiState;
-
-            // if (EditorGUI.EndChangeCheck())
-            // {
-            //     property.FindPropertyRelative("_sceneAsset").objectReferenceValue = scene;
-            //     sceneAsset = scene as SceneAsset;
-            //     if (sceneAsset != null)
-            //     {
-            //         property.FindPropertyRelative("_sceneName").stringValue = scene.name;
-            //         property.FindPropertyRelative("_scenePath").stringValue = AssetDatabase.GetAssetPath(scene);
-            //         property.FindPropertyRelative("_buildIndex").intValue = SceneUtility.GetBuildIndexByScenePath(
-            //             property.FindPropertyRelative("_scenePath").stringValue
-            //         );
-            //     }
-            // }
-
-            if (instance.FindPropertyRelative("_buildIndex").intValue != -1) return;
+            if (property.FindPropertyRelative("_buildIndex").intValue != -1) return;
 
             if (scene != null && scene is SceneAsset)
             {

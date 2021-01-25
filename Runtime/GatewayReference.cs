@@ -20,24 +20,6 @@ using UnityEditor;
 
 namespace Gateways
 {
-	public struct SceneInfo
-	{
-		private string _sceneName;
-		private string _scenePath;
-		private int _buildIndex;
-
-        public string SceneName => _sceneName;
-        public string ScenePath => _scenePath;
-        public int BuildIndex => _buildIndex;
-
-		public SceneInfo(string name, string path, int buildIndex)
-		{
-			_sceneName = name;
-			_scenePath = path;
-			_buildIndex = buildIndex;
-		}
-    }
-
     [System.Serializable]
     public class GateReference : ISerializationCallbackReceiver
     {
@@ -120,10 +102,7 @@ namespace Gateways
 			}
 		}
 
-		public SceneInfo GetSceneInfo()
-		{
-			return new SceneInfo(_sceneReference.SceneName, _sceneReference.ScenePath, _sceneReference.BuildIndex);
-		}
+		public SceneReference SceneReference => _sceneReference.Instance;
 
 		public GateReference() { }
 

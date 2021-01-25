@@ -15,7 +15,8 @@ namespace Gateways.Editor
 		private SerializedProperty _guidProp;
 		private SerializedProperty _sceneProp;
 		private SerializedProperty _nameProp;
-		private SerializedProperty _sceneReferenceProp;
+		private SerializedProperty _lockedReference;
+		private SerializedProperty _sceneRefInstance;
 
 		// cache off GUI content to avoid creating garbage every frame in editor
     	private GUIContent _sceneLabel = new GUIContent("Containing Scene", "The target object is expected in this scene asset.");
@@ -24,8 +25,8 @@ namespace Gateways.Editor
 		// add an extra line to display source scene for targets
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			_sceneReferenceProp = property.FindPropertyRelative("_sceneReference");
-			return base.GetPropertyHeight(property, label) + EditorGUIUtility.singleLineHeight + EditorGUI.GetPropertyHeight(_sceneReferenceProp);
+			_lockedReference = property.FindPropertyRelative("_sceneReference");
+			return base.GetPropertyHeight(property, label) + EditorGUIUtility.singleLineHeight + EditorGUI.GetPropertyHeight(_lockedReference, true);
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) 
@@ -33,7 +34,8 @@ namespace Gateways.Editor
 			_guidProp = property.FindPropertyRelative("_serializedGuid");
 			_nameProp = property.FindPropertyRelative("_cachedName");
 			_sceneProp = property.FindPropertyRelative("_cachedScene");
-			_sceneReferenceProp = property.FindPropertyRelative("_sceneReference");
+			_lockedReference = property.FindPropertyRelative("_sceneReference");
+			_sceneRefInstance = _lockedReference.FindPropertyRelative("_instance");
 
 			// Using BeginProperty / EndProperty on the parent property means that
 			// prefab override logic works on the entire property.
@@ -100,10 +102,10 @@ namespace Gateways.Editor
 
 				Scene scene = EditorSceneManager.GetSceneByName(((SceneAsset)_sceneProp.objectReferenceValue).name);
 
-				_sceneReferenceProp.FindPropertyRelative("_sceneAsset").objectReferenceValue = sceneAsset;
-				_sceneReferenceProp.FindPropertyRelative("_sceneName").stringValue = scene.name;
-				_sceneReferenceProp.FindPropertyRelative("_scenePath").stringValue = scene.path;
-				_sceneReferenceProp.FindPropertyRelative("_buildIndex").intValue = scene.buildIndex;
+				_sceneRefInstance.FindPropertyRelative("_sceneAsset").objectReferenceValue = sceneAsset;
+				_sceneRefInstance.FindPropertyRelative("_sceneName").stringValue = scene.name;
+				_sceneRefInstance.FindPropertyRelative("_scenePath").stringValue = scene.path;
+				_sceneRefInstance.FindPropertyRelative("_buildIndex").intValue = scene.buildIndex;
 
 				// only update the GUID Prop if something changed. This fixes multi-edit on GUID References
 				if (component != currentGate)
@@ -120,9 +122,10 @@ namespace Gateways.Editor
 
 			position.y += EditorGUIUtility.singleLineHeight + 2;
 			Rect sceneFieldPosition = new Rect(position);
-			sceneFieldPosition.height = EditorGUI.GetPropertyHeight(_sceneReferenceProp);
 
-			EditorGUI.PropertyField(sceneFieldPosition, _sceneReferenceProp, true);
+			sceneFieldPosition.height = EditorGUI.GetPropertyHeight(_lockedReference, true);
+
+			EditorGUI.PropertyField(sceneFieldPosition, _lockedReference, true);
 		
 			EditorGUI.EndProperty();
 		}
@@ -132,10 +135,10 @@ namespace Gateways.Editor
 			_nameProp.stringValue = string.Empty;
 			_sceneProp.objectReferenceValue = null;
 
-			_sceneReferenceProp.FindPropertyRelative("_sceneAsset").objectReferenceValue = null;
-			_sceneReferenceProp.FindPropertyRelative("_sceneName").stringValue = string.Empty;
-			_sceneReferenceProp.FindPropertyRelative("_scenePath").stringValue = string.Empty;
-			_sceneReferenceProp.FindPropertyRelative("_buildIndex").intValue = -1;
+			_sceneRefInstance.FindPropertyRelative("_sceneAsset").objectReferenceValue = null;
+			_sceneRefInstance.FindPropertyRelative("_sceneName").stringValue = string.Empty;
+			_sceneRefInstance.FindPropertyRelative("_scenePath").stringValue = string.Empty;
+			_sceneRefInstance.FindPropertyRelative("_buildIndex").intValue = -1;
 
 			int arraySize = _guidProp.arraySize;
 			for (int i = 0; i < arraySize; ++i)

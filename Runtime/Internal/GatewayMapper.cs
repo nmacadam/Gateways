@@ -38,6 +38,7 @@ namespace Gateways.Internal
 		{
             if (!_hasTarget)
             {
+                Gate.HandleGateUnresolved();
                 return;
             }
 

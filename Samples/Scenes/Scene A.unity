@@ -668,7 +668,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1243,10 +1243,11 @@ MonoBehaviour:
   serializedGuid: b995c1138a145646831e1b2106ced628
   _attachedGate:
     _sceneReference:
-      _sceneAsset: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
-      _sceneName: Scene B
-      _scenePath: Assets/Gateways/Samples/Scenes/Scene B.unity
-      _buildIndex: 3
+      _instance:
+        _sceneAsset: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
+        _sceneName: Scene B
+        _scenePath: Assets/Gateways/Samples/Scenes/Scene B.unity
+        _buildIndex: 5
     _serializedGuid: b68582de66323b4fa0de0e52320b2f85
     _cachedName: Gate #3
     _cachedScene: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
@@ -1374,10 +1375,11 @@ MonoBehaviour:
   serializedGuid: dc1852b260da9240970a3673cd4b6812
   _attachedGate:
     _sceneReference:
-      _sceneAsset: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
-      _sceneName: Scene B
-      _scenePath: Assets/Scenes/Scene B.unity
-      _buildIndex: -1
+      _instance:
+        _sceneAsset: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
+        _sceneName: Scene B
+        _scenePath: Assets/Gateways/Samples/Scenes/Scene B.unity
+        _buildIndex: 5
     _serializedGuid: 37ea72d7227acc44ad2978f7d7a49142
     _cachedName: Gate #4
     _cachedScene: {fileID: 102900000, guid: c11e4bdbdc4a13d47884783ba86103fd, type: 3}
