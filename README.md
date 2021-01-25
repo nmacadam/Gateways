@@ -18,6 +18,9 @@ public class MyGate : Gate
   
   // You can also override the LoadScene method to implement
   // your own scene-loading solution
+  
+  // You can also use the static Gate.OnGateUnresolved callback
+  // to define what should happen when there isn't a gate
 }
 ```
 Add the `MyGate` component to the doorways in your scenes, then open both scenes at once.  Drag and drop the `Gate` components to their respective output `Gate`s.  Don't worry–The references being displayed are actually serialized unique identifiers!  They will persist after you close the scenes, and are how Gateways will resolve connections between scenes.
