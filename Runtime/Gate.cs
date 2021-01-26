@@ -5,6 +5,7 @@ using System;
 using Gateways.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Oni.SceneManagement;
 
 namespace Gateways
 {

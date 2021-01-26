@@ -1,7 +1,8 @@
 {
     "name": "Gateways.TestUtilities",
     "references": [
-        "GUID:1895a91365803e2418543e1f63430209"
+        "GUID:1895a91365803e2418543e1f63430209",
+        "GUID:9d6b8114fdc06ac44a7890a7bf0b849e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

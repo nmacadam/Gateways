@@ -1,3 +1,15 @@
-﻿{
-	"name": "Gateways"
+{
+    "name": "Gateways",
+    "references": [
+        "GUID:9d6b8114fdc06ac44a7890a7bf0b849e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

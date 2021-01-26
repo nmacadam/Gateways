@@ -1,3 +1,5 @@
+using Oni.SceneManagement;
+
 namespace Gateways.TestUtilities
 {
     /// <summary>

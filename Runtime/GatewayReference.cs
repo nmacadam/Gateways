@@ -13,6 +13,7 @@
 using UnityEngine;
 using System;
 using Gateways.Internal;
+using Oni.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,7 +31,7 @@ namespace Gateways
 		private Gate _cachedReference;
 		private bool _isComponentCacheSet;
 
-		[SerializeField] private LockedSceneReference _sceneReference;
+		[SerializeField] private LockedSceneReference _sceneReference = new LockedSceneReference();
 
 		// store our GUID in a form that Unity can save
 		[SerializeField]

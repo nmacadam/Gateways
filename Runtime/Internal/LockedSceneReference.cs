@@ -15,8 +15,7 @@
 
 using System;
 using UnityEngine;
-#if UNITY_EDITOR
-#endif
+using Oni.SceneManagement;
 
 namespace Gateways
 {
