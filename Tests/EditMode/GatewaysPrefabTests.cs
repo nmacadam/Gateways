@@ -23,7 +23,13 @@ namespace Gateways.Tests
             GameObject newGO = new GameObject("GuidTestGO");
             guidBase = newGO.AddComponent<FakeGate>();
 
-            prefab = PrefabUtility.CreatePrefab(prefabPath, guidBase.gameObject);
+            prefab = PrefabUtility.SaveAsPrefabAsset(guidBase.gameObject, prefabPath, out bool success);
+
+            if (!success)
+            {
+                Assert.Fail("Failed to create prefab for testing");
+            }
+
             guidPrefab = prefab.GetComponent<FakeGate>();
 
             Assert.IsNotNull(prefab);
