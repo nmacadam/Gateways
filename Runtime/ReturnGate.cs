@@ -54,7 +54,7 @@ namespace Gateways
 			}
 			else
 			{
-				throw new System.NullReferenceException("There is no previous return gate to reference.");
+				throw new GateResolutionException("There is no previous return gate to reference.")
             }
 		}
 	}
