@@ -60,9 +60,9 @@ namespace Gateways.Editor
 
 			currentGuid = new System.Guid(byteArray);
 			currentGO = GuidManager.ResolveGuid(currentGuid);
-			Gate currentGate = currentGO != null ? currentGO.GetComponent<Gate>() : null;
+			GateBase currentGate = currentGO != null ? currentGO.GetComponent<GateBase>() : null;
 
-			Gate component = null;
+			GateBase component = null;
 
 			if (currentGuid != System.Guid.Empty && currentGate == null)
 			{
@@ -83,7 +83,7 @@ namespace Gateways.Editor
 			else
 			{
 				// if our object is loaded, we can simply use an object field directly
-				component = EditorGUI.ObjectField(guidCompPosition, currentGate, typeof(Gate), true) as Gate;
+				component = EditorGUI.ObjectField(guidCompPosition, currentGate, typeof(GateBase), true) as GateBase;
 			}
 			
 			if (currentGate != null && component == null)

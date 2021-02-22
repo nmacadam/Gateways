@@ -28,7 +28,7 @@ namespace Gateways
 		private GameObject _cachedGameObject;
 		private bool _isGameObjectCacheSet;
 
-		private Gate _cachedReference;
+		private GateBase _cachedReference;
 		private bool _isComponentCacheSet;
 
 		[SerializeField] private LockedSceneReference _sceneReference = new LockedSceneReference();
@@ -69,7 +69,7 @@ namespace Gateways
 			}
 		}
 
-		public Gate Gateway
+		public GateBase Gateway
 		{
 			get
 			{
@@ -78,7 +78,7 @@ namespace Gateways
 					return _cachedReference;
 				}
 
-				return gameObject.GetComponent<Gate>();
+				return gameObject.GetComponent<GateBase>();
 			}
 		}
 
