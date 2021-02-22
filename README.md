@@ -18,14 +18,25 @@ public class MyGate : Gate
   
   // You can also override the LoadScene method to implement
   // your own scene-loading solution
-  
-  // You can also use the static Gate.OnGateUnresolved callback
-  // to define what should happen when there isn't a gate
 }
 ```
 Add the `MyGate` component to the doorways in your scenes, then open both scenes at once.  Drag and drop the `Gate` components to their respective output `Gate`s.  Don't worry–The references being displayed are actually serialized unique identifiers!  They will persist after you close the scenes, and are how Gateways will resolve connections between scenes.
 <br><br>
 ![Gateways example](/Documentation~/gateways_example.gif "Example")
+
+## Customization
+### Resolution Error Handling
+The `GatewaysEvents` class contains a number of callbacks for handling various errors that may arise from failing to resolve a gate.  These include:
+
+- `OnGateUnresolved`: Invoked when the target Guid does not resolve an object.  Throws a `GateResolutionException` by default.
+- `OnGateComponentNotFound`: Invoked when a component of type GateBase is not found on the resolved object.  Throws a `GateComponentNotFoundException` by default.
+- `OnTargetMissing`: Invoked when no target Guid is available for lookup; usually occurs when a scene is first loaded in game without a Gate.
+
+### Additional Gate Types
+Use a `ReturnGate` to create a door that links back to the last door that was used.  This can be used for creating doorways to scenes that are reused, like a shop, or world-hub.
+
+### Scene Loading
+Both `Gate` and `ReturnGate` have an overridable `LoadScene` method you can use to integrate Gateways into your own scene-loading code.
 
 ## Installation
 ### Git
