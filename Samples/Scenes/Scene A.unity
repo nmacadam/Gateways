@@ -1241,6 +1241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedGuid: b995c1138a145646831e1b2106ced628
+  _resolutionMode: 0
   _attachedGate:
     _sceneReference:
       _instance:
@@ -1373,6 +1374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedGuid: dc1852b260da9240970a3673cd4b6812
+  _resolutionMode: 0
   _attachedGate:
     _sceneReference:
       _instance:

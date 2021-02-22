@@ -14,7 +14,7 @@ namespace Gateways.TestUtilities
 
         public SceneReference GetAttachedSceneInfoTest()
 		{
-			return GetAttachedSceneReference();
+			return GetTargetSceneReference();
 		}
     }
 }

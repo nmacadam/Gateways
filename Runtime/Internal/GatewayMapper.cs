@@ -4,13 +4,21 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Oni.SceneManagement;
 
 namespace Gateways.Internal
 {
+    /// <summary>
+    /// Handles looking up IDs and handing off resolved Gates
+    /// </summary>
     internal static class GatewayMapper
 	{
         private static bool _hasTarget;
 		private static Guid _target;
+
+        private static bool _hasPrevious;
+		private static Guid _previous;
+        private static SceneReference _previousSceneReference;
 
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
@@ -18,12 +26,36 @@ namespace Gateways.Internal
             SceneManager.activeSceneChanged += TryResolveTargetGate;
         }
 
+        public static void WritePreviousGate(GateReference gatewayReference)
+        {
+            WritePreviousGate(gatewayReference.Guid);
+        }
+
+        public static void WritePreviousGate(GateBase gate)
+        {
+            WritePreviousGate(gate.GetGuid());
+        }
+
+        public static void WritePreviousGate(Guid guid)
+        {
+            _hasPrevious = true;
+            _previousSceneReference = new SceneReference(SceneManager.GetActiveScene().buildIndex);
+            _previous = guid;
+        }
+
+        public static bool TryGetPreviousGuid(out Guid previous, out SceneReference scene)
+        {
+            previous = _previous;
+            scene = _previousSceneReference;
+            return _hasPrevious;
+        }
+
         public static void WriteTargetGate(GateReference gatewayReference)
         {
             WriteTargetGate(gatewayReference.Guid);
         }
 
-        public static void WriteTargetGate(Gate gate)
+        public static void WriteTargetGate(GateBase gate)
         {
             WriteTargetGate(gate.GetGuid());
         }
@@ -38,21 +70,21 @@ namespace Gateways.Internal
 		{
             if (!_hasTarget)
             {
-                Gate.HandleGateUnresolved();
+                GatewaysEvents.OnTargetMissing();
                 return;
             }
 
             GameObject gameObject = GuidManager.ResolveGuid(_target);
             if (gameObject == null)
             {
-                UnityEngine.Debug.LogError("There is no GameObject with the stored guid");
+                GatewaysEvents.OnGateUnresolved();
                 return;
             }
 
-            Gate gate = gameObject.GetComponent<Gate>();
+            GateBase gate = gameObject.GetComponent<GateBase>();
             if (gate == null)
             {
-                UnityEngine.Debug.LogError("There is no Gateway with the stored guid");
+                GatewaysEvents.OnGateComponentNotFound();
                 return;
             }
 
