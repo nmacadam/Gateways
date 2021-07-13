@@ -1,5 +1,5 @@
 {
-  "name": "com.daruma-works.gateways",
+  "name": "com.daruma-works.oni.gateways",
   "version": "1.0.0-preview",
   "displayName": "Gateways",
   "description": "A cross-scene door connection system",
